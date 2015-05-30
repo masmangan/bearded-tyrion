@@ -8,6 +8,10 @@ public class UndirectedGraphMatrix implements UndirectedGraph {
 	private boolean[][] matrix;
 	private List<String> names;
 	
+	public UndirectedGraphMatrix() {
+		// TODO inicializar matrix e names
+	}
+	
 	@Override
 	public void addVertice(String vertice) {
 		// TODO armazenar o vertice em names, se ainda não existir
@@ -23,19 +27,17 @@ public class UndirectedGraphMatrix implements UndirectedGraph {
 
 	@Override
 	public int getDegree(String vertice) {
-		// TODO obter posicao do vertice
-		// TODO contar quantas saidas tem o vertice, na matrix
-		// TODO retornar o total
-		return 0;
+		return getAllAdjacents(vertice).size();
 	}
 
 	@Override
 	public ArrayList<String> getAllAdjacents(String vertice) {
+		ArrayList<String> resposta = new ArrayList<String>(); 
 		// TODO obter posicao do vertice
 		// TODO verificar quantas saidas tem o vertice, na matrix
 		// TODO para cada saida, armazenar o nome do vertice na resposta
 		// TODO retornar a resposta
-		return null;
+		return resposta;
 	}
 	
 	@Override
