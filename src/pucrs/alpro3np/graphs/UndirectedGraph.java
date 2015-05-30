@@ -1,4 +1,4 @@
-package puvrs.alpro2np.graphs;
+package pucrs.alpro3np.graphs;
 
 public interface UndirectedGraph extends AbstractGraph {
 
