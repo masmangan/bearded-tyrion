@@ -9,11 +9,26 @@ public abstract class AbstractGraphMatrix {
 	protected boolean[][] matrix;
 	protected List<String> names;
 
+	protected boolean[] visited;
+	
+	
 	public AbstractGraphMatrix() {
 		matrix = new boolean[5][5];
+		visited = new boolean[5];
+		
 		names = new ArrayList<String>();
 	}
 
+	public boolean isVisited(int n) {
+		return visited[n];
+	}
+	public void setVisitedTo(int n) {
+		visited[n] = true;
+	}	
+	public void resetVisited() {
+		visited = new boolean[5];
+	}		
+	
 	public abstract void addEdge(String strOrig, String strDest);
 
 	public void addVertice(String vertice) {
