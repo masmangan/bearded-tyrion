@@ -58,16 +58,5 @@ public class DirectedGraphMatrix extends AbstractGraphMatrix implements
 		matrix[posOrig][posDest] = true;
 	}
 
-	@Override
-	public ArrayList<String> traversalWidth(String vertice) {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	public ArrayList<String> traversalDepth(String vertice) {
-		// TODO Auto-generated method stub
-		return null;
-	}
 
 }

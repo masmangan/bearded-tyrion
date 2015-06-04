@@ -16,7 +16,14 @@ public class DirectedGraphMatrixTestApp {
 		g.addEdge("POA", "SDU");
 		System.out.println(g);
 		System.out.println(g.getSources());
-		System.out.println(g.getSinks());		
+		System.out.println(g.getSinks());
+		
+		System.out.println(g.traversalWidth("POA"));
+		System.out.println(g.traversalWidth("CWB"));
+		
+		System.out.println(g.traversalDepth("POA"));
+		System.out.println(g.traversalDepth("CWB"));			
+		
 	}
 
 }
