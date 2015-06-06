@@ -23,7 +23,7 @@ public class DirectedGraphMatrix extends AbstractGraphMatrix implements
 	private int getGrauSaida(int i) {
 		int saidas = 0;
 		for (int j = 0; j < names.size(); j++)
-			if (matrix[i][j] == true)
+			if (matrix[i][j] != 0)
 				saidas++;
 		return saidas;
 	}
@@ -31,7 +31,7 @@ public class DirectedGraphMatrix extends AbstractGraphMatrix implements
 	private int getGrauEntrada(int i) {
 		int entradas = 0;
 		for (int j = 0; j < names.size(); j++)
-			if (matrix[j][i] == true)
+			if (matrix[j][i] != 0)
 				entradas++;
 		return entradas;
 	}
@@ -52,10 +52,10 @@ public class DirectedGraphMatrix extends AbstractGraphMatrix implements
 	}
 
 	@Override
-	public void addEdge(String strOrig, String strDest) {
+	public void addEdge(String strOrig, String strDest, int peso) {
 		int posOrig = names.indexOf(strOrig);
 		int posDest = names.indexOf(strDest);
-		matrix[posOrig][posDest] = true;
+		matrix[posOrig][posDest] = peso;
 	}
 
 

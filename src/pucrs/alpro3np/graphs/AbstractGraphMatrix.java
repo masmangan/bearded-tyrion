@@ -9,13 +9,13 @@ import java.util.Stack;
 
 public abstract class AbstractGraphMatrix {
 
-	protected boolean[][] matrix;
+	protected int[][] matrix;
 	protected List<String> names;
 
 	protected boolean[] visited;
 
 	public AbstractGraphMatrix() {
-		matrix = new boolean[7][7];
+		matrix = new int[7][7];
 		visited = new boolean[7];
 
 		names = new ArrayList<String>();
@@ -33,7 +33,11 @@ public abstract class AbstractGraphMatrix {
 		visited = new boolean[5];
 	}
 
-	public abstract void addEdge(String strOrig, String strDest);
+	public void addEdge(String strOrig, String strDest) {
+		addEdge(strOrig, strDest, 1);
+	}
+
+	public abstract void addEdge(String strOrig, String strDest, int peso);
 
 	public void addVertice(String vertice) {
 		// TODO ampliar matriz caso necess�rio
@@ -47,8 +51,8 @@ public abstract class AbstractGraphMatrix {
 					"O nodo n�o pode ter nome em branco. ");
 
 		if (names.contains(vertice))
-			throw new IllegalArgumentException("O nodo j� est� cadastrado: "
-					+ vertice);
+			throw new IllegalArgumentException(
+					"O nodo j� est� cadastrado: " + vertice);
 
 		names.add(vertice);
 	}
@@ -63,7 +67,7 @@ public abstract class AbstractGraphMatrix {
 		if (pos == -1)
 			throw new IllegalArgumentException("Vertice invalido: " + vertice);
 		for (int i = 0; i < matrix.length; i++) {
-			if (matrix[pos][i] == true) {
+			if (matrix[pos][i] != 0) {
 				resposta.add(names.get(i));
 			}
 		}
