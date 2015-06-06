@@ -134,7 +134,7 @@ public abstract class AbstractGraphMatrix {
 	}
 
 	private boolean marked[];
-	
+
 	public ArrayList<String> Path(String orig, String dest) {
 		int posOrig = names.indexOf(orig);
 		int posDest = names.indexOf(dest);
@@ -142,7 +142,7 @@ public abstract class AbstractGraphMatrix {
 		ArrayList<String> r = new ArrayList<>();
 
 		marked = new boolean[names.size()];
-		
+
 		Path(posOrig, posDest, r);
 		Collections.reverse(r);
 		return r;
@@ -163,17 +163,17 @@ public abstract class AbstractGraphMatrix {
 				}
 			}
 		}
-		
+
 	}
+
+	public int countNodesReachable(String v) {
+		// TODO:
+		return 0;
+	}
+
+	public ArrayList<String> getTwoLevelsAhead(String v) {
+		// TODO:
+		return null;
+	}
+
 }
-
-
-
-
-
-
-
-
-
-
-
