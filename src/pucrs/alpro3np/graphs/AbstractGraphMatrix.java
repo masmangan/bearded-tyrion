@@ -2,6 +2,7 @@ package pucrs.alpro3np.graphs;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Collections;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Queue;
@@ -12,25 +13,9 @@ public abstract class AbstractGraphMatrix {
 	protected int[][] matrix;
 	protected List<String> names;
 
-	protected boolean[] visited;
-
 	public AbstractGraphMatrix() {
 		matrix = new int[7][7];
-		visited = new boolean[7];
-
 		names = new ArrayList<String>();
-	}
-
-	public boolean isVisited(int n) {
-		return visited[n];
-	}
-
-	public void setVisitedTo(int n) {
-		visited[n] = true;
-	}
-
-	public void resetVisited() {
-		visited = new boolean[5];
 	}
 
 	public void addEdge(String strOrig, String strDest) {
@@ -148,4 +133,47 @@ public abstract class AbstractGraphMatrix {
 		return resposta;
 	}
 
+	private boolean marked[];
+	
+	public ArrayList<String> Path(String orig, String dest) {
+		int posOrig = names.indexOf(orig);
+		int posDest = names.indexOf(dest);
+		// TODO: verificar se os nodos existem
+		ArrayList<String> r = new ArrayList<>();
+
+		marked = new boolean[names.size()];
+		
+		Path(posOrig, posDest, r);
+		Collections.reverse(r);
+		return r;
+	}
+
+	private void Path(int posOrig, int posDest, ArrayList<String> r) {
+		marked[posOrig] = true;
+		if (posOrig == posDest) {
+			r.add(names.get(posDest));
+		} else {
+			for (int i = 0; i < names.size(); i++) {
+				if (matrix[posOrig][i] != 0 && !marked[i]) {
+					Path(i, posDest, r);
+					if (!r.isEmpty()) {
+						r.add(names.get(posOrig));
+						break;
+					}
+				}
+			}
+		}
+		
+	}
 }
+
+
+
+
+
+
+
+
+
+
+
