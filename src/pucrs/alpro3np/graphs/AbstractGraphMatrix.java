@@ -176,4 +176,12 @@ public abstract class AbstractGraphMatrix {
 		return null;
 	}
 
+	public void sssp() {
+		// Dijkstra
+	}
+
+	public void assp() {
+		// FLoyd-Warshall
+	}
+
 }
