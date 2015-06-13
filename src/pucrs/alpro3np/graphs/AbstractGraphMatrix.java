@@ -167,8 +167,7 @@ public abstract class AbstractGraphMatrix {
 	}
 
 	public int countNodesReachable(String v) {
-		// TODO:
-		return 0;
+		return traversalDepth(v).size();
 	}
 
 	public ArrayList<String> getTwoLevelsAhead(String v) {
@@ -176,12 +175,14 @@ public abstract class AbstractGraphMatrix {
 		return null;
 	}
 
-	public void sssp() {
+	public int[] sssp(String v) {
 		// Dijkstra
+		return null;
 	}
 
-	public void assp() {
-		// FLoyd-Warshall
+	public int[][] assp() {
+		// Floyd-Warshall
+		return null;
 	}
 
 }
