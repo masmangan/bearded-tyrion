@@ -2,14 +2,18 @@ package pucrs.alpro3np.graphs;
 
 import java.util.ArrayList;
 
-public class DirectedGraphMatrix extends AbstractGraphMatrix implements
-		DirectedGraph {
+public class DirectedGraphMatrix
+	extends AbstractGraphMatrix
+	implements DirectedGraph
+{
 
 	@Override
-	public ArrayList<String> getSources() {
+	public ArrayList<String> getSources()
+	{
 		ArrayList<String> resposta = new ArrayList<String>();
 
-		for (int i = 0; i < names.size(); i++) {
+		for (int i = 0; i < names.size(); i++)
+		{
 			int entradas = getGrauEntrada(i);
 			if (entradas > 0)
 				continue;
@@ -20,7 +24,8 @@ public class DirectedGraphMatrix extends AbstractGraphMatrix implements
 		return resposta;
 	}
 
-	private int getGrauSaida(int i) {
+	private int getGrauSaida(int i)
+	{
 		int saidas = 0;
 		for (int j = 0; j < names.size(); j++)
 			if (matrix[i][j] != 0)
@@ -28,7 +33,8 @@ public class DirectedGraphMatrix extends AbstractGraphMatrix implements
 		return saidas;
 	}
 
-	private int getGrauEntrada(int i) {
+	private int getGrauEntrada(int i)
+	{
 		int entradas = 0;
 		for (int j = 0; j < names.size(); j++)
 			if (matrix[j][i] != 0)
@@ -37,12 +43,15 @@ public class DirectedGraphMatrix extends AbstractGraphMatrix implements
 	}
 
 	@Override
-	public ArrayList<String> getSinks() {
+	public ArrayList<String> getSinks()
+	{
 		ArrayList<String> resposta = new ArrayList<String>();
 
-		for (int i = 0; i < names.size(); i++) {
+		for (int i = 0; i < names.size(); i++)
+		{
 			int entradas = getGrauEntrada(i);
-			if (entradas > 0) {
+			if (entradas > 0)
+			{
 				int saidas = getGrauSaida(i);
 				if (saidas == 0)
 					resposta.add(names.get(i));
@@ -52,11 +61,11 @@ public class DirectedGraphMatrix extends AbstractGraphMatrix implements
 	}
 
 	@Override
-	public void addEdge(String strOrig, String strDest, int peso) {
+	public void addEdge(String strOrig, String strDest, int peso)
+	{
 		int posOrig = names.indexOf(strOrig);
 		int posDest = names.indexOf(strDest);
 		matrix[posOrig][posDest] = peso;
 	}
-
 
 }

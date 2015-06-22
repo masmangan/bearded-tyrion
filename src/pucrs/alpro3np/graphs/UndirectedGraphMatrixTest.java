@@ -7,10 +7,11 @@ import java.util.List;
 
 import org.junit.Test;
 
-public class UndirectedGraphMatrixTest {
-
+public class UndirectedGraphMatrixTest
+{
 	@Test
-	public void testDegreePOA() {
+	public void testDegreePOA()
+	{
 		UndirectedGraph g = new UndirectedGraphMatrix();
 		g.addVertice("POA");
 		g.addVertice("CWB");
@@ -23,7 +24,8 @@ public class UndirectedGraphMatrixTest {
 	}
 
 	@Test
-	public void testAllAdjacentsPOA() {
+	public void testAllAdjacentsPOA()
+	{
 		UndirectedGraph g = new UndirectedGraphMatrix();
 		g.addVertice("POA");
 		g.addVertice("CWB");
@@ -33,7 +35,6 @@ public class UndirectedGraphMatrixTest {
 		List<String> actual = g.getAllAdjacents("POA");
 		assertEquals(2, actual.size());
 		assertTrue(actual.contains("CWB"));
-		assertTrue(actual.contains("SDU"));		
+		assertTrue(actual.contains("SDU"));
 	}
-
 }

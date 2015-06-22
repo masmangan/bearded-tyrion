@@ -1,9 +1,10 @@
 package pucrs.alpro3np.graphs;
 
-public class DirectedGraphMatrixTestApp {
-
-	public static void main(String[] args) {
-		DirectedGraph  g = new DirectedGraphMatrix();
+public class DirectedGraphMatrixTestApp
+{
+	public static void main(String[] args)
+	{
+		DirectedGraph g = new DirectedGraphMatrix();
 		System.out.println(g);
 		g.addVertice("POA");
 		System.out.println(g);
@@ -17,13 +18,11 @@ public class DirectedGraphMatrixTestApp {
 		System.out.println(g);
 		System.out.println(g.getSources());
 		System.out.println(g.getSinks());
-		
+
 		System.out.println(g.traversalWidth("POA"));
 		System.out.println(g.traversalWidth("CWB"));
-		
-		System.out.println(g.traversalDepth("POA"));
-		System.out.println(g.traversalDepth("CWB"));			
-		
-	}
 
+		System.out.println(g.traversalDepth("POA"));
+		System.out.println(g.traversalDepth("CWB"));
+	}
 }

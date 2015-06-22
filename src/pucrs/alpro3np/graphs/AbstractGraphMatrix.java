@@ -8,67 +8,74 @@ import java.util.List;
 import java.util.Queue;
 import java.util.Stack;
 
-public abstract class AbstractGraphMatrix {
-
+public abstract class AbstractGraphMatrix
+{
 	protected int[][] matrix;
 	protected List<String> names;
 
-	public AbstractGraphMatrix() {
+	public AbstractGraphMatrix()
+	{
 		matrix = new int[7][7];
 		names = new ArrayList<String>();
 	}
 
-	public void addEdge(String strOrig, String strDest) {
+	public void addEdge(String strOrig, String strDest)
+	{
 		addEdge(strOrig, strDest, 1);
 	}
 
 	public abstract void addEdge(String strOrig, String strDest, int peso);
 
-	public void addVertice(String vertice) {
+	public void addVertice(String vertice)
+	{
 		// TODO ampliar matriz caso necess�rio
 
 		if (vertice == null)
-			throw new IllegalArgumentException(
-					"O nodo n�o pode ter nome null. ");
+			throw new IllegalArgumentException("O nodo n�o pode ter nome null. ");
 
 		if (vertice.trim().isEmpty())
-			throw new IllegalArgumentException(
-					"O nodo n�o pode ter nome em branco. ");
+			throw new IllegalArgumentException("O nodo n�o pode ter nome em branco. ");
 
 		if (names.contains(vertice))
-			throw new IllegalArgumentException(
-					"O nodo j� est� cadastrado: " + vertice);
+			throw new IllegalArgumentException("O nodo j� est� cadastrado: " + vertice);
 
 		names.add(vertice);
 	}
 
-	public int getDegree(String vertice) {
+	public int getDegree(String vertice)
+	{
 		return getAllAdjacents(vertice).size();
 	}
 
-	public ArrayList<String> getAllAdjacents(String vertice) {
+	public ArrayList<String> getAllAdjacents(String vertice)
+	{
 		ArrayList<String> resposta = new ArrayList<String>();
 		int pos = names.indexOf(vertice);
 		if (pos == -1)
 			throw new IllegalArgumentException("Vertice invalido: " + vertice);
-		for (int i = 0; i < matrix.length; i++) {
-			if (matrix[pos][i] != 0) {
+		for (int i = 0; i < matrix.length; i++)
+		{
+			if (matrix[pos][i] != 0)
+			{
 				resposta.add(names.get(i));
 			}
 		}
 		return resposta;
 	}
 
-	public String toString() {
+	public String toString()
+	{
 		String r = "";
 		r += names.toString();
-		for (int i = 0; i < matrix.length; i++) {
+		for (int i = 0; i < matrix.length; i++)
+		{
 			r += "\n" + Arrays.toString(matrix[i]);
 		}
 		return r;
 	}
 
-	public ArrayList<String> traversalWidth(String vertice) {
+	public ArrayList<String> traversalWidth(String vertice)
+	{
 		// 1. Visite um nodo arbitr�rio
 		ArrayList<String> resposta = new ArrayList<String>();
 		int pos = names.indexOf(vertice);
@@ -79,14 +86,17 @@ public abstract class AbstractGraphMatrix {
 		Queue<Integer> queue = new LinkedList<Integer>();
 		queue.add(pos);
 		// 3. Enquanto a fila Q n�o estiver vazia
-		while (!queue.isEmpty()) {
+		while (!queue.isEmpty())
+		{
 			// 4. Retire um elemento N de Q
 			int current = queue.remove();
 			// 5. Para cada nodo M (n�o marcado) adjacente a N
 			ArrayList<String> adjs = getAllAdjacents(names.get(current));
-			for (String a : adjs) {
+			for (String a : adjs)
+			{
 				// n�o marcado
-				if (!resposta.contains(a)) {
+				if (!resposta.contains(a))
+				{
 					// 6. Visite M
 					resposta.add(a);
 					// 7. Coloque M na fila Q
@@ -98,7 +108,8 @@ public abstract class AbstractGraphMatrix {
 		return resposta;
 	}
 
-	public ArrayList<String> traversalDepth(String vertice) {
+	public ArrayList<String> traversalDepth(String vertice)
+	{
 
 		// 1. Visite um nodo arbitrário
 		ArrayList<String> resposta = new ArrayList<String>();
@@ -110,14 +121,17 @@ public abstract class AbstractGraphMatrix {
 		Stack<Integer> pilha = new Stack<>();
 		pilha.push(pos);
 		// 3. Enquanto a pilha S não estiver vazia
-		while (!pilha.isEmpty()) {
+		while (!pilha.isEmpty())
+		{
 			// 4. Retire um elemento N de S
 			int current = pilha.pop();
 			// 5. Para cada nodo M ( não marcado ) adjacente a N
 			ArrayList<String> adjs = getAllAdjacents(names.get(current));
-			for (String a : adjs) {
+			for (String a : adjs)
+			{
 				// 6. Visite M
-				if (!resposta.contains(a)) {
+				if (!resposta.contains(a))
+				{
 					resposta.add(a);
 					// 7. Coloque N na pilha S
 					pilha.push(current);
@@ -135,7 +149,8 @@ public abstract class AbstractGraphMatrix {
 
 	private boolean marked[];
 
-	public ArrayList<String> Path(String orig, String dest) {
+	public ArrayList<String> Path(String orig, String dest)
+	{
 		int posOrig = names.indexOf(orig);
 		int posDest = names.indexOf(dest);
 		// TODO: verificar se os nodos existem
@@ -148,15 +163,22 @@ public abstract class AbstractGraphMatrix {
 		return r;
 	}
 
-	private void Path(int posOrig, int posDest, ArrayList<String> r) {
+	private void Path(int posOrig, int posDest, ArrayList<String> r)
+	{
 		marked[posOrig] = true;
-		if (posOrig == posDest) {
+		if (posOrig == posDest)
+		{
 			r.add(names.get(posDest));
-		} else {
-			for (int i = 0; i < names.size(); i++) {
-				if (matrix[posOrig][i] != 0 && !marked[i]) {
+		}
+		else
+		{
+			for (int i = 0; i < names.size(); i++)
+			{
+				if (matrix[posOrig][i] != 0 && !marked[i])
+				{
 					Path(i, posDest, r);
-					if (!r.isEmpty()) {
+					if (!r.isEmpty())
+					{
 						r.add(names.get(posOrig));
 						break;
 					}
@@ -166,23 +188,26 @@ public abstract class AbstractGraphMatrix {
 
 	}
 
-	public int countNodesReachable(String v) {
+	public int countNodesReachable(String v)
+	{
 		return traversalDepth(v).size();
 	}
 
-	public ArrayList<String> getTwoLevelsAhead(String v) {
+	public ArrayList<String> getTwoLevelsAhead(String v)
+	{
 		// TODO:
 		return null;
 	}
 
-	public int[] sssp(String v) {
+	public int[] sssp(String v)
+	{
 		// Dijkstra
 		return null;
 	}
 
-	public int[][] assp() {
+	public int[][] assp()
+	{
 		// Floyd-Warshall
 		return null;
 	}
-
 }
