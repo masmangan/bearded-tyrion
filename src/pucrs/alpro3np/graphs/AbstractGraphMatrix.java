@@ -36,8 +36,8 @@ public abstract class AbstractGraphMatrix {
 					"O nodo n�o pode ter nome em branco. ");
 
 		if (names.contains(vertice))
-			throw new IllegalArgumentException(
-					"O nodo j� est� cadastrado: " + vertice);
+			throw new IllegalArgumentException("O nodo j� est� cadastrado: "
+					+ vertice);
 
 		names.add(vertice);
 	}
@@ -171,8 +171,28 @@ public abstract class AbstractGraphMatrix {
 	}
 
 	public ArrayList<String> getTwoLevelsAhead(String v) {
-		// TODO:
-		return null;
+		ArrayList<String> resposta = new ArrayList<String>();
+		int pos = names.indexOf(v);
+		if (pos == -1)
+			throw new IllegalArgumentException("Vertice invalido: " + v);
+
+		// Level 0
+		resposta.add(v);
+		
+		// Level 1
+		ArrayList<String> adjs = getAllAdjacents(names.get(pos));
+		for (String a : adjs)
+			if (!resposta.contains(a))
+				resposta.add(a);
+
+		// Level 2
+		for (String a : adjs)  {
+			ArrayList<String> adjs2 = getAllAdjacents(a);
+			for (String a2 : adjs2) 
+				if (!resposta.contains(a2))
+				resposta.add(a2);
+		}
+		return resposta;
 	}
 
 	public int[] sssp(String v) {
@@ -183,6 +203,15 @@ public abstract class AbstractGraphMatrix {
 	public int[][] assp() {
 		// Floyd-Warshall
 		return null;
+	}
+
+	public void kruskal() {
+	}
+
+	public void prim() {
+	}
+
+	public void fordFulkerson() {
 	}
 
 }
