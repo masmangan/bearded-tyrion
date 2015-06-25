@@ -195,23 +195,33 @@ public abstract class AbstractGraphMatrix {
 		return resposta;
 	}
 
+	/**
+	 * 
+	 * @param v
+	 * @return
+	 */
 	public int[] sssp(String v) {
 		// Dijkstra
+		// TODO
 		return null;
 	}
 
 	public int[][] assp() {
 		// Floyd-Warshall
+		// TODO
 		return null;
 	}
 
 	public void kruskal() {
+		// TODO
 	}
 
 	public void prim() {
+		// TODO
 	}
 
 	public void fordFulkerson() {
+		// TODO
 	}
 
 }
