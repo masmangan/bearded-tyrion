@@ -6,7 +6,7 @@ public interface AbstractGraph
 {
 	void addVertice(String vertice);
 
-	void addEdge(String strOrig, String strDest, int peso);
+	void addEdge(String strOrig, String strDest, double peso);
 
 	void addEdge(String strOrig, String strDest);
 

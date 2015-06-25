@@ -10,12 +10,12 @@ import java.util.Stack;
 
 public abstract class AbstractGraphMatrix
 {
-	protected int[][] matrix;
+	protected double[][] matrix;
 	protected List<String> names;
 
 	public AbstractGraphMatrix()
 	{
-		matrix = new int[7][7];
+		matrix = new double[7][7];
 		names = new ArrayList<String>();
 	}
 
@@ -24,20 +24,24 @@ public abstract class AbstractGraphMatrix
 		addEdge(strOrig, strDest, 1);
 	}
 
-	public abstract void addEdge(String strOrig, String strDest, int peso);
+	public abstract void addEdge(String strOrig, String strDest, double peso);
 
 	public void addVertice(String vertice)
 	{
-		// TODO ampliar matriz caso necessï¿½rio
-
 		if (vertice == null)
-			throw new IllegalArgumentException("O nodo nï¿½o pode ter nome null. ");
+		{
+			throw new IllegalArgumentException("O nodo não pode ter nome null. ");
+		}
 
 		if (vertice.trim().isEmpty())
-			throw new IllegalArgumentException("O nodo nï¿½o pode ter nome em branco. ");
+		{
+			throw new IllegalArgumentException("O nodo não pode ter nome em branco. ");
+		}
 
 		if (names.contains(vertice))
-			throw new IllegalArgumentException("O nodo jï¿½ estï¿½ cadastrado: " + vertice);
+		{
+			throw new IllegalArgumentException("O nodo já está cadastrado: " + vertice);
+		}
 
 		names.add(vertice);
 	}
@@ -50,9 +54,14 @@ public abstract class AbstractGraphMatrix
 	public ArrayList<String> getAllAdjacents(String vertice)
 	{
 		ArrayList<String> resposta = new ArrayList<String>();
+		
 		int pos = names.indexOf(vertice);
+		
 		if (pos == -1)
+		{
 			throw new IllegalArgumentException("Vertice invalido: " + vertice);
+		}
+		
 		for (int i = 0; i < matrix.length; i++)
 		{
 			if (matrix[pos][i] != 0)
@@ -60,6 +69,7 @@ public abstract class AbstractGraphMatrix
 				resposta.add(names.get(i));
 			}
 		}
+		
 		return resposta;
 	}
 
@@ -79,12 +89,18 @@ public abstract class AbstractGraphMatrix
 		// 1. Visite um nodo arbitrï¿½rio
 		ArrayList<String> resposta = new ArrayList<String>();
 		int pos = names.indexOf(vertice);
+		
 		if (pos == -1)
+		{
 			throw new IllegalArgumentException("Vertice invalido: " + vertice);
+		}
+		
 		resposta.add(names.get(pos)); // resposta.add(vertice);
+		
 		// 2. Marque o nodo e coloque-o em uma fila Q
 		Queue<Integer> queue = new LinkedList<Integer>();
 		queue.add(pos);
+		
 		// 3. Enquanto a fila Q nï¿½o estiver vazia
 		while (!queue.isEmpty())
 		{
@@ -94,7 +110,7 @@ public abstract class AbstractGraphMatrix
 			ArrayList<String> adjs = getAllAdjacents(names.get(current));
 			for (String a : adjs)
 			{
-				// nï¿½o marcado
+				// nó marcado
 				if (!resposta.contains(a))
 				{
 					// 6. Visite M
@@ -105,12 +121,12 @@ public abstract class AbstractGraphMatrix
 				}
 			}
 		}
+		
 		return resposta;
 	}
 
 	public ArrayList<String> traversalDepth(String vertice)
 	{
-
 		// 1. Visite um nodo arbitrÃ¡rio
 		ArrayList<String> resposta = new ArrayList<String>();
 		int pos = names.indexOf(vertice);
@@ -196,18 +212,6 @@ public abstract class AbstractGraphMatrix
 	public ArrayList<String> getTwoLevelsAhead(String v)
 	{
 		// TODO:
-		return null;
-	}
-
-	public int[] sssp(String v)
-	{
-		// Dijkstra
-		return null;
-	}
-
-	public int[][] assp()
-	{
-		// Floyd-Warshall
 		return null;
 	}
 }
