@@ -15,7 +15,7 @@ public abstract class AbstractGraphMatrix
 
 	public AbstractGraphMatrix()
 	{
-		matrix = new double[7][7];
+		matrix = new double[16][16];
 		names = new ArrayList<String>();
 	}
 
@@ -201,7 +201,6 @@ public abstract class AbstractGraphMatrix
 				}
 			}
 		}
-
 	}
 
 	public int countNodesReachable(String v)

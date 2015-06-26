@@ -21,7 +21,8 @@ public class UndirectedGraphMatrix extends AbstractGraphMatrix implements Undire
 		e.setWeight(peso);
 		edges.add(e);
 	}
-
+	
+	@Override
 	public ArrayList<Edge> Kruskal()
 	{
 		ArrayList<Edge> retVal = new ArrayList<Edge>();
@@ -37,7 +38,7 @@ public class UndirectedGraphMatrix extends AbstractGraphMatrix implements Undire
 
 		for (Edge edge : edges)
 		{
-			if (!containsEdge(edge, retVal))
+			if (!isCiclical(edge, retVal))
 			{
 				retVal.add(edge);
 			}
@@ -46,16 +47,46 @@ public class UndirectedGraphMatrix extends AbstractGraphMatrix implements Undire
 		return retVal;
 	}
 
-	private boolean containsEdge(Edge edge, ArrayList<Edge> edges)
+	ArrayList<Edge> visited = new ArrayList<Edge>();
+	
+	private boolean isCiclical(Edge edge, ArrayList<Edge> verify)
 	{
-		for (Edge e : edges)
+		String verticeToFind = edge.getOrigin();
+		String destination = edge.getDestination();
+		
+		visited.clear();
+		
+		return isCiclical(verticeToFind, destination, verify);
+	}
+
+	private boolean isCiclical(String verticeToFind, String destination, ArrayList<Edge> verify)
+	{
+		for (int i = 0; i < verify.size(); i++)
 		{
-			if (e.getOrigin() == edge.getOrigin() || e.getDestination() == edge.getOrigin() || e.getOrigin() == edge.getDestination() || e.getDestination() == edge.getDestination())
+			Edge e = verify.get(i);
+			
+			if (visited.contains(e))
 			{
-				return false;
+				continue;
+			}
+			
+			if (e.contains(verticeToFind))
+			{
+				if (e.contains(destination))
+				{
+					return true;
+				}
+				else
+				{					
+					visited.add(e);
+					if (isCiclical((e.getOrigin() == verticeToFind ? e.getDestination() : e.getOrigin()), destination, verify))
+					{
+						return true;
+					}
+				}
 			}
 		}
-
+		
 		return false;
 	}
 }

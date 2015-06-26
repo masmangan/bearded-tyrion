@@ -35,4 +35,14 @@ public class Edge
 		this.weight = weight;
 	}
 	
+	public Boolean contains(String vertice)
+	{
+		return vertice == origin || vertice == destination;
+	}
+	
+	@Override
+	public String toString()
+	{
+		return "[" + origin + ", " + destination + ", " + weight +"]";
+	}
 }
