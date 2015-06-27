@@ -36,8 +36,8 @@ public abstract class AbstractGraphMatrix {
 					"O nodo n�o pode ter nome em branco. ");
 
 		if (names.contains(vertice))
-			throw new IllegalArgumentException("O nodo j� est� cadastrado: "
-					+ vertice);
+			throw new IllegalArgumentException(
+					"O nodo j� est� cadastrado: " + vertice);
 
 		names.add(vertice);
 	}
@@ -178,7 +178,7 @@ public abstract class AbstractGraphMatrix {
 
 		// Level 0
 		resposta.add(v);
-		
+
 		// Level 1
 		ArrayList<String> adjs = getAllAdjacents(names.get(pos));
 		for (String a : adjs)
@@ -186,11 +186,11 @@ public abstract class AbstractGraphMatrix {
 				resposta.add(a);
 
 		// Level 2
-		for (String a : adjs)  {
+		for (String a : adjs) {
 			ArrayList<String> adjs2 = getAllAdjacents(a);
-			for (String a2 : adjs2) 
+			for (String a2 : adjs2)
 				if (!resposta.contains(a2))
-				resposta.add(a2);
+					resposta.add(a2);
 		}
 		return resposta;
 	}
@@ -199,21 +199,79 @@ public abstract class AbstractGraphMatrix {
 	 * 
 	 * @param v
 	 * @return
+	 * @author Arthur Wermann
 	 */
 	public int[] sssp(String v) {
 		// Dijkstra
-		// TODO
-		return null;
+		// @author Arthur
+		int[] result = new int[names.size()];
+		int pos = names.indexOf(v);
+		ArrayList<String> q = new ArrayList<>(names);
+		for (int x = 0; x < result.length; x++)
+			result[x] = Integer.MAX_VALUE / 4;
+		result[pos] = 0;
+		
+		while (!q.isEmpty()) {
+			int u = remove(q, result);
+			for (String x : getAllAdjacents(names.get(u))) {
+				if (q.contains(x)) {
+					if (result[u] + matrix[u][names.indexOf(x)] < result[names.indexOf(x)])
+						result[names.indexOf(x)] = result[u] + matrix[u][names.indexOf(x)];
+				}
+			}
+			
+		}
+		
+		return result;
+	}
+
+	private int remove(ArrayList<String> q, int[] result) {
+		// FIXME
+//		int e = names.indexOf(q.get(0));
+//		for (String v : q) {
+//			if (result[names.indexOf(v)] < result[e])
+//			e = result[names.indexOf(v)];
+//		}
+//		for (int i = 1; i < q.size(); i++) {
+//			if (result[i] < result[e])
+//				e = i;
+//		}
+//		q.remove(names.get(e));
+//		return e;
+		return 0;
 	}
 
 	public int[][] assp() {
 		// Floyd-Warshall
 		// TODO
-		return null;
-	}
+		// @autor Jairo Santos
+		int[][] distancia = new int[names.size()][names.size()];
 
-	public void kruskal() {
-		// TODO
+		// busca o peso das aresta
+		for (int x = 0; x < distancia.length; x++) {
+			for (int y = 0; y < distancia.length; y++) {
+				if (matrix[x][y] == 0 && x != y)
+					distancia[x][y] = Integer.MAX_VALUE / 4;
+				else
+					distancia[x][y] = matrix[x][y];
+
+			}
+		}
+
+		for (int k = 0; k < distancia.length; k++) {
+			for (int i = 0; i < distancia.length; i++) {
+				for (int j = 0; j < distancia.length; j++) {
+					if (distancia[i][k] + distancia[k][j] < distancia[i][j]) {
+						distancia[i][j] = distancia[i][k] + distancia[k][j];
+					}
+
+				}
+
+			}
+
+		}
+
+		return distancia;
 	}
 
 	public void prim() {
